@@ -5,45 +5,38 @@ const timeout = 1000 * 60 * 5; // timeout to send the message 5 min
 const AutoDM = () => {
   const stream = T.stream("user");
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
-  stream.on("follow", SendMessage);
+  stream.on("direct_message", SendMessage);
 };
 
 const SendMessage = user => {
-  const { screen_name, name } = user.source;
+  var msg = eventMsg.direct_message.text;
+    var screenName = eventMsg.direct_message.sender.screen_name;
+    var msgID = eventMsg.direct_message.id_str;
 
-  const obj = 
-    // screen_name,
-    // text: GenerateMessage(name)
-    {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": screen_name}, "message_data": {"text": GenerateMessage(name)}}}};
-  
-  // the follow stream track if I follow author person too.
-  if (screen_name != my_user_name) {
-    console.log(" 🎉🎉🎉🎉 New Follower  🎉🎉🎉🎉🎉 ");
-    setTimeout(() => {
-      T.post("direct_messages/events/new", obj)
-        .catch(err => {
-          console.error("error", err.stack);
-        })
-        .then(result => {
-          console.log(`Message sent successfully To  ${screen_name}  💪💪`);
+    if (screenName === 'MyBotExample') {
+        return callbackHandler(msgID);
+    }else if (msg.search['Hi','Hello'] !== -1 ) {
+        return T.post('direct_messages/new', { 
+            screen_name: screenName,
+            text: 'Hey, what can I do for you?'} , function () {
+            callbackHandler(msgID);
         });
-    }, timeout);
-  }
-};
-const GenerateMessage = name => {
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
-  const d = new Date();
-  const dayName = days[d.getDay()];
-  return `Hi ${name} Thanks for .... \n Happy ${dayName} 😊😊 `; // your message
-  // My message   return `Hi ${name} Thanks for being a part of my social media network. I'am the @PicsrushE founder,A new Online Image Editor completely with web technologies,I'm also a reactjs developer and medium blogger.\n Happy to discuss anytime 😊  \n Happy ${dayName} 😊😊 `;
+    }
+    else if (msg.search['Apple','Red'] !== -1 ) {
+        return T.post('direct_messages/new', { 
+            screen_name: screenName,
+            text: 'Love it!'} , function () {
+            callbackHandler(msgID);
+        });
+    }
+    else {
+        return T.post('direct_messages/new', {
+            screen_name: screenName,
+            text: "I don't know "
+        }, function() {
+            callbackHandler(msgID);
+        });
+    }
 };
 
 module.exports = AutoDM;
