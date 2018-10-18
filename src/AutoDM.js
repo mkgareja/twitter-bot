@@ -9,9 +9,10 @@ const AutoDM = () => {
 };
 
 const SendMessage = user => {
-  var msg = eventMsg.direct_message.text;
-    var screenName = eventMsg.direct_message.sender.screen_name;
-    var msgID = eventMsg.direct_message.id_str;
+  console.log("Start Sending Auto Direct Message 🚀🚀🚀");
+  const msg = eventMsg.direct_message.text;
+    const screenName = eventMsg.direct_message.sender.screen_name;
+    const msgID = eventMsg.direct_message.id_str;
 
     if (screenName === 'MyBotExample') {
         return callbackHandler(msgID);
