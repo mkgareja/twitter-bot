@@ -11,10 +11,11 @@ const AutoDM = () => {
 const SendMessage = user => {
   const { screen_name, name } = user.source;
 
-  const obj = {
-    screen_name,
-    text: GenerateMessage(name)
-  };
+  const obj = 
+    // screen_name,
+    // text: GenerateMessage(name)
+    {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": screen_name}, "message_data": {"text": GenerateMessage(name)}}}};
+  
   // the follow stream track if I follow author person too.
   if (screen_name != my_user_name) {
     console.log(" 🎉🎉🎉🎉 New Follower  🎉🎉🎉🎉🎉 ");
