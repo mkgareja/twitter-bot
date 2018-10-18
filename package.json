@@ -1,14 +1,15 @@
 {
-  "name": "twitter_bot",
+  "name": "npm-twitter",
   "version": "1.0.0",
-  "description": "Node js twitter bot to send auto direct message",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Youssouf El AZIZI",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "twit": "*"
+    "twit": "^2.2.11",
+    "twitter": "^1.7.1"
   }
 }
