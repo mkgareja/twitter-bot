@@ -19,7 +19,7 @@ const SendMessage = user => {
   if (screen_name != my_user_name) {
     console.log(" 🎉🎉🎉🎉 New Follower  🎉🎉🎉🎉🎉 ");
     setTimeout(() => {
-      T.post("direct_messages/new", obj)
+      T.post("direct_messages/events/new", obj)
         .catch(err => {
           console.error("error", err.stack);
         })
